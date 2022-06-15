@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using myPOS.Data;
 using myPOS.Data.Models;
+using myPOS.Services.Transactions;
 using myPOS.Services.User;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,7 +29,8 @@ builder.Services.
     AddControllersWithViews(options => options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>());
 
 builder.Services
-    .AddTransient<IUserService, UserService>();
+    .AddTransient<IUserService, UserService>()
+    .AddTransient<ITransactionsService, TransactionsService>();
 
 var app = builder.Build();
 

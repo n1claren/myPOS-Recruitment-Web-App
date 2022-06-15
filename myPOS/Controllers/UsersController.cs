@@ -27,8 +27,8 @@ namespace myPOS.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterFormModel registeringUser)
         {
-            var emailInUse = userService.EmailInUse(registeringUser.Email);
-            var phoneInUse = userService.PhoneNumberInUse(registeringUser.PhoneNumber);
+            var emailInUse = this.userService.EmailInUse(registeringUser.Email);
+            var phoneInUse = this.userService.PhoneNumberInUse(registeringUser.PhoneNumber);
 
             if (emailInUse)
             {
@@ -54,7 +54,8 @@ namespace myPOS.Controllers
             {
                 Email = registeringUser.Email,
                 UserName = registeringUser.Email.Split("@")[0],
-                PhoneNumber = registeringUser.PhoneNumber
+                PhoneNumber = registeringUser.PhoneNumber,
+                Credits = 100
             };
 
             var result = await this.userManager.CreateAsync(user, registeringUser.Password);
