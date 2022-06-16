@@ -66,7 +66,24 @@ namespace myPOS.Controllers
 
             this.transactionsService.CompleteTransaction(userId, send.RecipientPhone, send.CreditsAmount, send.Message);
 
-            return RedirectToAction("Credits", "Dashboard");
+            return RedirectToAction("Dashboard", "Credits");
+        }
+
+        [Authorize]
+        public IActionResult Dashboard()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var sentTransactions = this.transactionsService.UserSentTransactions(userId);
+            var receivedTransactions = this.transactionsService.UserReceivedTransactions(userId);
+
+            var model = new DashboardViewModel
+            {
+                UserSentTransactions = sentTransactions,
+                UserReceivedTransactions = receivedTransactions
+            };
+
+            return View(model);
         }
     }
 }

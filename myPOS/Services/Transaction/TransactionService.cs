@@ -1,5 +1,6 @@
 ﻿using myPOS.Data;
 using myPOS.Data.Models;
+using myPOS.Models;
 
 namespace myPOS.Services.Transactions
 {
@@ -29,5 +30,31 @@ namespace myPOS.Services.Transactions
             this.data.Transactions.Add(transaction);
             this.data.SaveChanges();
         }
+
+        public ICollection<TransactionDTO> UserReceivedTransactions(string userId)
+            => this.data
+            .Transactions
+            .Where(t => t.ReceiverId == userId)
+            .OrderByDescending(t => t.Id)
+            .Select(t => new TransactionDTO
+            {
+                Nickname = t.Sender.UserName,
+                Credits = t.CreditsAmount,
+                Message = t.Message
+            })
+            .ToList();
+
+        public ICollection<TransactionDTO> UserSentTransactions(string userId)
+            => this.data
+            .Transactions
+            .Where(t => t.SenderId == userId)
+            .OrderByDescending(t => t.Id)
+            .Select(t => new TransactionDTO
+            {
+                Nickname = t.Receiver.UserName,
+                Credits = t.CreditsAmount,
+                Message = t.Message
+            })
+            .ToList();
     }
 }

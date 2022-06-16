@@ -1,0 +1,59 @@
+﻿<h1 class="display-3">Your SENT transactions:</h1>
+@if (Model.UserSentTransactions.Count == 0)
+{
+    <h3>There are no transactions where you are the sender yet.</h3>
+}
+else
+{
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Receiver Username</th>
+                <th scope="col">Credits Amount</th>
+                <th scope="col">Your Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in Model.UserSentTransactions)
+            {
+                <tr>
+                    <td scope="col">@transaction.Nickname</td>
+                    <td scope="col">@transaction.Credits</td>
+                    <td scope="col">@transaction.Message</td>
+                    <td scope="col">
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<h1 class="display-3">Your RECEIVED transactions:</h1>
+@if (Model.UserReceivedTransactions.Count == 0)
+{
+    <h3>There are no transactions where you are the recipient yet.</h3>
+}
+else
+{
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Sender Username</th>
+                <th scope="col">Credits Amount</th>
+                <th scope="col">Their Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in Model.UserReceivedTransactions)
+            {
+                <tr>
+                    <td scope="col">@transaction.Nickname</td>
+                    <td scope="col">@transaction.Credits</td>
+                    <td scope="col">@transaction.Message</td>
+                    <td scope="col">
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
