@@ -1,5 +1,6 @@
 ﻿@{
     var userIsAdmin = User.IsInRole("Admin");
+    var userIsAuthenticated = User.Identity.IsAuthenticated;
 }
 
 <!DOCTYPE html>
@@ -26,7 +27,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @if (!User.Identity.IsAuthenticated)
+                        @if (!userIsAuthenticated)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Login">Login</a>
@@ -54,6 +55,9 @@
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="RegisteredUsers">Registered Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Credits" asp-action="Transactions">Transactions</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Logout">Logout</a>

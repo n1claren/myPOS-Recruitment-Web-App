@@ -1,0 +1,30 @@
+﻿@if (Model.Transactions.Count == 0) 
+{
+    <h1 class="display-4">We still don't have any transactions on our application.</h1>
+}
+else 
+{
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Sender Username</th>
+                <th scope="col">Receiver Username</th>
+                <th scope="col">Credits Amount</th>
+                <th scope="col">Sender Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in Model.Transactions)
+            {
+                <tr>
+                    <td scope="col">@transaction.SenderUsername</td>
+                    <td scope="col">@transaction.ReceiverUsername</td>
+                    <td scope="col">@transaction.Amount</td>
+                    <td scope="col">@transaction.Message</td>
+                    <td scope="col">
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

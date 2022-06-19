@@ -9,5 +9,7 @@ namespace myPOS.Services.Transactions
         public ICollection<TransactionDTO> UserSentTransactions(string userId);
 
         public ICollection<TransactionDTO> UserReceivedTransactions(string userId);
+
+        public TransactionsViewModel GetAllTransactions();
     }
 }

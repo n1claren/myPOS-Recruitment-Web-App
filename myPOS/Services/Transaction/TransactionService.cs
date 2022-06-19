@@ -56,5 +56,25 @@ namespace myPOS.Services.Transactions
                 Message = t.Message
             })
             .ToList();
+
+        public TransactionsViewModel GetAllTransactions()
+        {
+            var transactions = this.data
+                                   .Transactions
+                                   .OrderByDescending(t => t.Id)
+                                   .Select(t => new TransactionsDTO
+                                   {
+                                       SenderUsername = t.Sender.UserName,
+                                       ReceiverUsername = t.Receiver.UserName,
+                                       Amount = t.CreditsAmount,
+                                       Message = t.Message
+                                   })
+                                   .ToList();
+
+            return new TransactionsViewModel
+            {
+                Transactions = transactions
+            };
+        }
     }
 }

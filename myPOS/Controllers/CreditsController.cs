@@ -91,5 +91,13 @@ namespace myPOS.Controllers
 
             return View(model);
         }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult Transactions()
+        {
+            var transactions = this.transactionsService.GetAllTransactions();
+
+            return View(transactions);
+        }
     }
 }
