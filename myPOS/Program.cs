@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using myPOS.Data;
 using myPOS.Data.Models;
+using myPOS.Infrastructure;
 using myPOS.Services.Transactions;
 using myPOS.Services.User;
 
@@ -10,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services
-    .AddDbContext<ApplicationDbContext>(options =>options.UseSqlServer(connectionString));
+    .AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services
     .AddDatabaseDeveloperPageExceptionFilter();
@@ -23,6 +25,7 @@ builder.Services
         options.Password.RequireUppercase = false;
         options.Password.RequireNonAlphanumeric = false;
     })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.
@@ -33,6 +36,8 @@ builder.Services
     .AddTransient<ITransactionsService, TransactionsService>();
 
 var app = builder.Build();
+
+app.MigrateDatabase();
 
 if (app.Environment.IsDevelopment())
 {
