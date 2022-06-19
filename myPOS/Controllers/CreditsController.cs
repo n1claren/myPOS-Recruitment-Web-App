@@ -41,6 +41,7 @@ namespace myPOS.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var userCredits = this.userService.GetCreditBalance(userId);
+            var userPhoneNumber = this.userService.GetUserPhoneNumber(userId);
 
             if (send.CreditsAmount > userCredits)
             {
@@ -50,6 +51,11 @@ namespace myPOS.Controllers
             if (send.CreditsAmount <= 0)
             {
                 ModelState.AddModelError(string.Empty, "You can't send 0 or negative amount credits!");
+            }
+
+            if (send.RecipientPhone == userPhoneNumber)
+            {
+                ModelState.AddModelError(string.Empty, "You can not make transactions to yourself!");
             }
 
             var recipientExists = this.userService.PhoneNumberInUse(send.RecipientPhone);

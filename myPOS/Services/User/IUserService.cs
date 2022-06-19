@@ -13,5 +13,7 @@ namespace myPOS.Services.User
         public string GetUsername(string userId);
 
         public AdminDashboardViewModel GetUsers();
+
+        public string GetUserPhoneNumber(string userId);
     }
 }

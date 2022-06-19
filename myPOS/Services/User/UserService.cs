@@ -22,6 +22,9 @@ namespace myPOS.Services.User
         public bool PhoneNumberInUse(string phoneNumber)
             => this.data.Users.Any(u => u.PhoneNumber == phoneNumber);
 
+        public string GetUserPhoneNumber(string userId)
+            => this.data.Users.Where(u => u.Id == userId).FirstOrDefault().PhoneNumber;
+
         public AdminDashboardViewModel GetUsers()
         {
             var users = this.data
