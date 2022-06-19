@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var userIsAdmin = User.IsInRole("Admin");
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -31,7 +35,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Register">Register</a>
                             </li>
                         }
-                        else
+                        else if (!userIsAdmin)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Credits" asp-action="Balance">Credits Balance</a>
@@ -41,6 +45,15 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Credits" asp-action="Dashboard">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else if (userIsAdmin)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="RegisteredUsers">Registered Users</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Logout">Logout</a>

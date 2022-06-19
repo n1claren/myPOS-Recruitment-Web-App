@@ -1,4 +1,6 @@
-﻿namespace myPOS.Services.User
+﻿using myPOS.Models;
+
+namespace myPOS.Services.User
 {
     public interface IUserService
     {
@@ -9,5 +11,7 @@
         public int GetCreditBalance(string userId);
 
         public string GetUsername(string userId);
+
+        public AdminDashboardViewModel GetUsers();
     }
 }

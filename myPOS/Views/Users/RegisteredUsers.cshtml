@@ -1,0 +1,30 @@
+﻿@if (Model.Users.Count == 0) 
+{
+    <h1 class="display-4">We still don't have any users on our application.</h1>
+}
+else 
+{
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Credits Amount</th>
+                <th scope="col">Transactions Made</th>
+                <th scope="col">Transactions Received</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td scope="col">@user.Username</td>
+                    <td scope="col">@user.Credits</td>
+                    <td scope="col">@user.TransactionsMade</td>
+                    <td scope="col">@user.TransactionsReceived</td>
+                    <td scope="col">
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

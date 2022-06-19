@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using myPOS.Data.Models;
 using myPOS.Models;
@@ -104,6 +105,14 @@ namespace myPOS.Controllers
             await this.signInManager.SignOutAsync();
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult RegisteredUsers()
+        {
+            var users = this.userService.GetUsers();
+
+            return View(users);
         }
 
         private IActionResult InvalidCredentials(LoginFormModel login)
