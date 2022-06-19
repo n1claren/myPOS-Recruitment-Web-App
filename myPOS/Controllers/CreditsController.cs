@@ -48,6 +48,11 @@ namespace myPOS.Controllers
                 ModelState.AddModelError(string.Empty, "Insufficient credits!");
             }
 
+            if (send.Message.Length > 180)
+            {
+                ModelState.AddModelError(string.Empty, "Message can not exceed 180 symbols!");
+            }
+
             if (send.CreditsAmount <= 0)
             {
                 ModelState.AddModelError(string.Empty, "You can't send 0 or negative amount credits!");
