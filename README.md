@@ -4,5 +4,5 @@
 <h2>Admin_Login: "Admin@myPOS.com"</h2>
 <h3>Admin_Password: "Administrator13"</h3>
 
-[DEPLOYED TO AZURE]([https://link-url-here.org](https://myposcredits.azurewebsites.net/))
+https://myposcredits.azurewebsites.net/
 
